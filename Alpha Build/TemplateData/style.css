@@ -1,16 +1,183 @@
-body { padding: 0; margin: 0 }
-#unity-container { position: absolute }
-#unity-container.unity-desktop { left: 50%; top: 50%; transform: translate(-50%, -50%) }
-#unity-container.unity-mobile { position: fixed; width: 100%; height: 100% }
-#unity-canvas { background: #FFFFFF }
-.unity-mobile #unity-canvas { width: 100%; height: 100% }
-#unity-loading-bar { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none }
-#unity-logo { width: 154px; height: 130px; background: url('unity-logo-light.png') no-repeat center }
-#unity-progress-bar-empty { width: 141px; height: 18px; margin-top: 10px; margin-left: 6.5px; background: url('progress-bar-empty-light.png') no-repeat center }
-#unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-light.png') no-repeat center }
-#unity-footer { position: relative }
-.unity-mobile #unity-footer { display: none }
-#unity-webgl-logo { float:left; width: 204px; height: 38px; background: url('webgl-logo.png') no-repeat center }
-#unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px }
-#unity-fullscreen-button { cursor:pointer; float: right; width: 38px; height: 38px; background: url('fullscreen-button.png') no-repeat center }
-#unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./fonts/Montserrat-SemiBold.ttf');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./fonts/Montserrat-ExtraBold.ttf');
+  font-weight: 800;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+#unity-container {
+  position: absolute;
+}
+#unity-container.unity-desktop {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#unity-container.unity-mobile {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: url('./bg.png');
+  background-size: cover;
+  background-position: center;
+}
+.unity-mobile #unity-canvas {
+  width: 100%;
+  height: 100%;
+}
+#unity-loading-bar-top {
+  padding-top: 60px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+#unity-loading-bar {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+}
+
+#unity-logo {
+  width: 100%;
+  max-width: 480px;
+  width: calc(100vw - 32px);
+  flex-shrink: 0;
+}
+#unity-mc-image {
+  display: block;
+  height: 100%;
+  width: 100vw;
+  flex: 2;
+  background-image: url('./gavrusha.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#unity-advice-container {
+  max-width: 960px;
+  border-radius: 38px;
+  margin: 3vh 21px 0;
+  width: 75vw;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1.5px solid #f3f3f3;
+}
+#unity-advice {
+  padding: 1vw 2vw;
+  display: block;
+  font-family: 'Montserrat';
+  font-size: 3.5vw;
+
+  font-weight: 600;
+  line-height: 4vw;
+  color: #000;
+  text-align: center;
+  opacity: 0;
+}
+
+/* Progress bar */
+#unity-progress-bar-empty {
+  max-width: 960px;
+  --margin: 16px;
+  box-sizing: border-box;
+  width: calc(100% - var(--margin) * 2);
+  height: 62px;
+  flex-shrink: 0;
+  border-radius: 36px;
+  background-color: #efefef;
+  margin: 0 var(--margin) 40px;
+}
+#unity-progress-bar-full {
+  width: 0%;
+  height: 100%;
+  border-radius: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #e41e12;
+}
+#unity-progress-bar-percent {
+  display: block;
+  font-family: 'Montserrat';
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 42px;
+  text-align: center;
+  color: #fff;
+}
+
+/* Footer */
+#unity-footer {
+  position: relative;
+}
+.unity-mobile #unity-footer {
+  display: none;
+}
+#unity-webgl-logo {
+  float: left;
+  width: 182px;
+  height: 37px;
+  background: url('webgl-logo.png') no-repeat center;
+}
+#unity-build-title {
+  float: right;
+  margin-right: 10px;
+  line-height: 38px;
+  font-family: arial;
+  font-size: 18px;
+}
+#unity-fullscreen-button {
+  cursor: pointer;
+  float: right;
+  width: 38px;
+  height: 38px;
+  background: url('fullscreen-button.png') no-repeat center;
+}
+#unity-warning {
+  display: none !important;
+  position: absolute;
+  left: 50%;
+  top: 5%;
+  transform: translate(-50%);
+  background: white;
+  padding: 10px;
+  display: none;
+}
+
+@media (min-width: 700px) {
+  #unity-advice {
+    padding: 6px 12px;
+    font-size: 22px;
+    line-height: 22px;
+  }
+}
+
+@media (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3),
+  (device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) {
+  #unity-loading-bar-top {
+    padding-top: 60px;
+  }
+}
